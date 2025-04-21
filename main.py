@@ -1,4 +1,7 @@
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
+import pandas as pd
+from app_store_scraper import AppStore
 
 app = FastAPI()
 
@@ -8,5 +11,12 @@ async def root():
 
 
 @app.get("/reviews")
-async def root():
-    return {"id": "1", "something": "sajdsjsadadsj"}
+def get_reviews():
+    app = AppStore(
+        country='us',
+        app_name="Lumi: styling & shopping",
+        app_id='1637080045'
+    )
+    app.review(how_many=50)
+    df = pd.DataFrame(app.reviews)
+    return JSONResponse(content=df.to_dict(orient="records"))
