@@ -4,4 +4,9 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return {"greeting": "Hello, World!", "message": "Welcome to FastAPI!"}
+    return {"zimba": "zamba", "bazimba": "zazamba"}
+
+
+@app.get("/reviews")
+async def root():
+    return {"id": "1", "something": "sajdsjsadadsj"}
